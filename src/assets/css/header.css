@@ -1,0 +1,29 @@
+.app-header {
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .app-header-link {
+        text-decoration: none;
+    }
+
+    span.app-name {
+        color: black;
+        font-size: 24px;
+
+        @media (max-width: 600px) {
+            font-size: 20px;
+        }
+    }
+
+    span.app-version {
+        color: black;
+        padding-left: 8px;
+    }
+
+    .app-button-area {
+        display: flex;
+        flex-direction: row;
+    }
+}
