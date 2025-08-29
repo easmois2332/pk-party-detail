@@ -72,6 +72,13 @@ const buttonHtmlCopy = () => {
   htmlButton.value = true;
   setTimeout(() => (htmlButton.value = false), 3000)
 }
+
+// CSSリンクをクリップボードにコピー
+const buttonCssCopy = () => {
+  navigator.clipboard.writeText('<link href="https://easmois2332.github.io/pk-assets/css/party_output.css" rel="stylesheet">');
+  cssButton.value = true;
+  setTimeout(() => (cssButton.value = false), 3000)
+}
 </script>
 
 <template>
@@ -222,8 +229,8 @@ const buttonHtmlCopy = () => {
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton">
-                  CSSをクリップボードにコピー
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton" @click="buttonCssCopy">
+                  CSSリンクをクリップボードにコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
                   </template>
