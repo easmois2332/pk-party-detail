@@ -1,25 +1,20 @@
 <script setup>
 import {ref} from "vue";
 import html2canvas from "html2canvas";
+import pokemon from "@/classes/pokemon.js"
 
 const props = defineProps(['settingColor']);
 const emit = defineEmits(['detail-data']);
+const pkClass = new pokemon();
 
-const pkName = [
-  'フシギダネ',
-  'フシギソウ',
-  'フシギバナ',
-  'メガフシギバナ',
-  'ヒトカゲ',
-  'リザード',
-  'リザードン',
-  'メガリザードンX',
-  'メガリザードンY',
-  'ゼニガメ',
-  'カメール',
-  'カメックス',
-  'メガカメックス',
-];
+const pkName = pkClass.getPkNameList();
+
+let genderList = ref({
+  1: [], 2: [], 3: [], 4: [], 5: [], 6: []
+});
+let imageName = ref({
+  1: '0000_000_uk_n_000', 2: '0000_000_uk_n_000', 3: '0000_000_uk_n_000', 4: '0000_000_uk_n_000', 5: '0000_000_uk_n_000', 6: '0000_000_uk_n_000',
+});
 
 let pkCount = ref(1);
 let party = ref({
@@ -30,6 +25,20 @@ let party = ref({
   5: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
   6: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
 });
+
+let htmlButton = ref(false);
+let cssButton = ref(false);
+let iframeButton = ref(false);
+
+const getImage = (i, name, gender) => {
+  imageName.value[i] = pkClass.getPkImage(name, gender);
+}
+
+const changePkName = (i, name) => {
+  genderList.value[i] = pkClass.getPkGenderList(name);
+  party.value[i]['gender'] = null;
+  getImage(i, name, party.value[i]['gender']);
+}
 
 const buttonInsertDetailData = (i) => {
   emit('detail-data', JSON.parse(JSON.stringify(party.value[i])));
@@ -54,6 +63,14 @@ const buttonScreenShot = async () => {
     object.click();
     object.parentNode.removeChild(object);
   })
+}
+
+// HTMLをクリップボードにコピー
+const buttonHtmlCopy = () => {
+  let el = document.querySelector('.output-image > table.pk-party');
+  navigator.clipboard.writeText(el.outerHTML);
+  htmlButton.value = true;
+  setTimeout(() => (htmlButton.value = false), 3000)
 }
 </script>
 
@@ -84,6 +101,7 @@ const buttonScreenShot = async () => {
                     label="ポケモン名"
                     :items="pkName"
                     v-model="party[i]['pokemon']"
+                    @update:modelValue="changePkName(i, party[i]['pokemon'])"
                 ></v-autocomplete>
               </v-col>
               <v-col class="pb-0">
@@ -91,6 +109,8 @@ const buttonScreenShot = async () => {
                     label="性別"
                     :items="['♂', '♀']"
                     v-model="party[i]['gender']"
+                    v-bind:disabled="genderList[i].length === 0"
+                    @update:modelValue="getImage(i, party[i]['pokemon'], party[i]['gender'])"
                 ></v-select>
               </v-col>
             </v-row>
@@ -165,7 +185,7 @@ const buttonScreenShot = async () => {
               <table class="pk-party">
                 <tbody class="pk-party" v-bind:class="props.settingColor + '-' + (i % 2 + 1)" v-for="i in pkCount" :key="i">
                 <tr class="pk-party">
-                  <td class="pk-party image-area" rowspan="2"><img class="pk-party" src="https://easmois2332.github.io/pk-image/Pokemon/Normal/0000_000_uk_n_000.png" v-bind:alt="party[i]['pokemon']"></td>
+                  <td class="pk-party image-area" rowspan="2"><img class="pk-party" v-bind:src="'https://easmois2332.github.io/pk-image/Pokemon/Normal/' + imageName[i] + '.png'" v-bind:alt="party[i]['pokemon']"></td>
                   <td class="pk-party">{{ party[i]['moves1'] }}</td>
                   <td class="pk-party">{{ party[i]['moves2'] }}</td>
                 </tr>
@@ -186,13 +206,28 @@ const buttonScreenShot = async () => {
                 <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot">画像で保存</v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor">iframeをクリップボードにコピー</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton">
+                  iframeをクリップボードにコピー
+                  <template v-slot:loader>
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                  </template>
+                </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor">HTMLをクリップボードにコピー</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton" @click="buttonHtmlCopy">
+                  HTMLをクリップボードにコピー
+                  <template v-slot:loader>
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                  </template>
+                </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor">CSSをクリップボードにコピー</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton">
+                  CSSをクリップボードにコピー
+                  <template v-slot:loader>
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                  </template>
+                </v-btn>
               </div>
             </v-col>
           </v-card-text>

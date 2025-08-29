@@ -1,32 +1,16 @@
 <script setup>
 import {ref, watch} from "vue";
 import html2canvas from "html2canvas";
+import pokemon from "@/classes/pokemon.js"
+import nature from "@/assets/json/nature.json"
 
 const props = defineProps(['settingColor', 'detailData']);
+const pkClass = new pokemon();
 
-const pkName = [
-  'フシギダネ',
-  'フシギソウ',
-  'フシギバナ',
-  'メガフシギバナ',
-  'ヒトカゲ',
-  'リザード',
-  'リザードン',
-  'メガリザードンX',
-  'メガリザードンY',
-  'ゼニガメ',
-  'カメール',
-  'カメックス',
-  'メガカメックス',
-];
+const pkName = pkClass.getPkNameList();
 
-const nature = [
-  'がんばりや',
-  'さみしがり',
-  'いじっぱり',
-  'やんちゃ',
-  'ゆうかん',
-];
+let genderList = ref([]);
+let imageName = ref('0000_000_uk_n_000');
 
 let detail = ref({
   pokemon: null,
@@ -48,6 +32,20 @@ let detail = ref({
   free: null,
 });
 
+let htmlButton = ref(false);
+let cssButton = ref(false);
+let iframeButton = ref(false);
+
+const getImage = (name, gender) => {
+  imageName.value = pkClass.getPkImage(name, gender);
+}
+
+const changePkName = (name) => {
+  genderList.value = pkClass.getPkGenderList(name);
+  detail.value['gender'] = null;
+  getImage(name, detail.value['gender']);
+}
+
 // スクリーンショットを撮る
 const buttonScreenShot = async () => {
   const el = document.querySelector('.output-image > table.pk-detail');
@@ -62,11 +60,19 @@ const buttonScreenShot = async () => {
     let blobUrl = window.URL.createObjectURL(blob);
     let object = document.createElement('a');
     object.href = blobUrl;
-    object.download = `PkParty_${(new Date()).getTime()}.png`;
+    object.download = `PkDetail_${(new Date()).getTime()}.png`;
     document.body.appendChild(object);
     object.click();
     object.parentNode.removeChild(object);
   })
+}
+
+// HTMLをクリップボードにコピー
+const buttonHtmlCopy = () => {
+  let el = document.querySelector('.output-image > table.pk-detail');
+  navigator.clipboard.writeText(el.outerHTML);
+  htmlButton.value = true;
+  setTimeout(() => (htmlButton.value = false), 3000)
 }
 
 watch(() => props.detailData, () => {
@@ -80,6 +86,8 @@ watch(() => props.detailData, () => {
     detail.value['moves3'] = props.detailData['moves3'];
     detail.value['moves4'] = props.detailData['moves4'];
     detail.value['free'] = props.detailData['free'];
+    genderList.value = pkClass.getPkGenderList(detail.value['pokemon']);
+    getImage(detail.value['pokemon'], detail.value['gender']);
   }
 });
 </script>
@@ -97,13 +105,16 @@ watch(() => props.detailData, () => {
                     label="ポケモン名"
                     :items="pkName"
                     v-model="detail['pokemon']"
+                    @update:modelValue="changePkName(detail['pokemon'])"
                 ></v-autocomplete>
               </v-col>
               <v-col class="pb-0">
                 <v-select
                     label="性別"
-                    :items="['♂', '♀']"
+                    :items="genderList"
                     v-model="detail['gender']"
+                    v-bind:disabled="genderList.length === 0"
+                    @update:modelValue="getImage(detail['pokemon'], detail['gender'])"
                 ></v-select>
               </v-col>
             </v-row>
@@ -252,7 +263,7 @@ watch(() => props.detailData, () => {
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
                   <th class="pk-detail">HP</th>
                   <td class="pk-detail">{{ detail['hp'] }}</td>
-                  <td class="pk-detail image-area" rowspan="4"><img class="pk-detail" src="https://easmois2332.github.io/pk-image/Pokemon/Normal/0000_000_uk_n_000.png" v-bind:alt="detail['pokemon']"></td>
+                  <td class="pk-detail image-area" rowspan="4"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-image/Pokemon/Normal/' + imageName + '.png'" v-bind:alt="detail['pokemon']"></td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
                   <th class="pk-detail">こうげき</th>
@@ -299,13 +310,28 @@ watch(() => props.detailData, () => {
                 <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot">画像で保存</v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor">iframeをクリップボードにコピー</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton">
+                  iframeをクリップボードにコピー
+                  <template v-slot:loader>
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                  </template>
+                </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor">HTMLをクリップボードにコピー</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton" @click="buttonHtmlCopy">
+                  HTMLをクリップボードにコピー
+                  <template v-slot:loader>
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                  </template>
+                </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor">CSSをクリップボードにコピー</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton">
+                  CSSをクリップボードにコピー
+                  <template v-slot:loader>
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                  </template>
+                </v-btn>
               </div>
             </v-col>
           </v-card-text>

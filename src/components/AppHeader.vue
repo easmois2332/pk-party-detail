@@ -18,7 +18,7 @@ const setColor = (color) => {
   <div class="app-header" v-bind:class="'bg-' + settingColor + '-lighten-3'">
     <div class="app-name-area">
       <router-link to="/" class="app-header-link">
-        <span class="app-name font-bold">構築詳細出力ツール</span><span class="app-version">{{ appVersion }}</span>
+        <span class="app-name font-bold">構築詳細アウトプット</span><span class="app-version">{{ appVersion }}</span>
       </router-link>
     </div>
     <div class="app-button-area">

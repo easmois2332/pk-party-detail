@@ -1,6 +1,7 @@
 @import "css/header.css";
 @import "css/content.css";
-@import "css/output.css";
+@import "css/party_output.css";
+@import "css/detail_output.css";
 
 body {
     margin: 0;
