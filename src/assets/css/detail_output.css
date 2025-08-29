@@ -1,3 +1,7 @@
+.pk-detail {
+    vertical-align: middle;
+}
+
 table.pk-detail {
     border-collapse: collapse;
 
@@ -10,12 +14,17 @@ table.pk-detail {
     }
 
     th.pk-detail, td.pk-detail {
+        border: initial;
         height: 32px;
         padding: 0 8px;
         text-align: left;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         white-space: nowrap;
+    }
+
+    thead > tr > th.pk-detail, thead > tr > td.pk-detail {
+        font-size: 16px;
     }
 
     td.pk-detail.image-area {

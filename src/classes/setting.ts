@@ -1,7 +1,7 @@
 export default class Setting {
 
     settingColor: string = 'setting-color';
-    color: string = 'blue-grey';
+    color: string = 'blue';
 
     constructor() {
         this.getLocalStorage();

@@ -263,7 +263,7 @@ watch(() => props.detailData, () => {
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
                   <th class="pk-detail">HP</th>
                   <td class="pk-detail">{{ detail['hp'] }}</td>
-                  <td class="pk-detail image-area" rowspan="4"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-image/Pokemon/Normal/' + imageName + '.png'" v-bind:alt="detail['pokemon']"></td>
+                  <td class="pk-detail image-area" rowspan="4"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName + '.png'" v-bind:alt="detail['pokemon']"></td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
                   <th class="pk-detail">こうげき</th>

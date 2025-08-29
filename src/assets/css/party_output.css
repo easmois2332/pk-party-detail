@@ -1,7 +1,12 @@
+.pk-party {
+    vertical-align: middle;
+}
+
 table.pk-party {
     border-collapse: collapse;
 
     td.pk-party {
+        border: initial;
         width: 160px;
         height: 36px;
         padding: 0 8px;
