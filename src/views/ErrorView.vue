@@ -5,6 +5,10 @@ const props = defineProps(['settingColor']);
 <template>
   <div class="content-area">
     <h1>ページが見つかりません。</h1>
-    <router-link to="/">トップに戻る</router-link>
+    <v-row class="pt-16">
+      <v-col>
+        <router-link to="/">トップに戻る</router-link>
+      </v-col>
+    </v-row>
   </div>
 </template>
