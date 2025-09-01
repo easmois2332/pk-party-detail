@@ -14,7 +14,7 @@ const setColor = (color) => {
 
 <template>
   <AppHeader
-    v-if="$route.path !== '/iframe'"
+    v-if="$route.name !== 'iframe'"
     :setting-color="settingColor"
     @set-color="setColor"
   />

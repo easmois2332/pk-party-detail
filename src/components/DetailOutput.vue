@@ -67,6 +67,16 @@ const buttonScreenShot = async () => {
   })
 }
 
+// iframeをクリップボードにコピー
+const buttonIframeCopy = () => {
+  let el = document.querySelector('.output-image > table.pk-detail');
+  let param = new URLSearchParams(JSON.stringify(detail.value));
+  let url = document.location.href + 'iframe/detail?color=' + props.settingColor + '&detail=' + param.toString().replace('=', '')
+  navigator.clipboard.writeText('<iframe frameborder="no" scrolling="no" width="' + el.clientWidth + '" height="' + el.clientHeight + '" src="' + url + '"></iframe>');
+  iframeButton.value = true;
+  setTimeout(() => (iframeButton.value = false), 3000)
+}
+
 // HTMLをクリップボードにコピー
 const buttonHtmlCopy = () => {
   let el = document.querySelector('.output-image > table.pk-detail');
@@ -317,10 +327,11 @@ watch(() => props.detailData, () => {
                 <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot">画像で保存</v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton">
+                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton" @click="buttonIframeCopy">
                   iframeをクリップボードにコピー
                   <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    コピーしました
                   </template>
                 </v-btn>
               </div>
@@ -328,7 +339,8 @@ watch(() => props.detailData, () => {
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton" @click="buttonHtmlCopy">
                   HTMLをクリップボードにコピー
                   <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    コピーしました
                   </template>
                 </v-btn>
               </div>
@@ -336,7 +348,8 @@ watch(() => props.detailData, () => {
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton" @click="buttonCssCopy">
                   CSSリンクをクリップボードにコピー
                   <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    コピーしました
                   </template>
                 </v-btn>
               </div>

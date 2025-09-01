@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from "@/views/HomeView.vue";
 import HelpView from "@/views/HelpView.vue";
 import IframeView from "@/views/IframeView.vue";
+import ErrorView from "@/views/ErrorView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,9 +18,14 @@ const router = createRouter({
             component: HelpView,
         },
         {
-            path: '/iframe',
+            path: '/iframe/:format',
             name: 'iframe',
             component: IframeView,
+        },
+        {
+            path: '/:error(.*)',
+            name: 'error',
+            component: ErrorView,
         },
     ],
 })
