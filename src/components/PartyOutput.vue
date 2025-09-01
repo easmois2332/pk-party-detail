@@ -18,12 +18,12 @@ let imageName = ref({
 
 let pkCount = ref(1);
 let party = ref({
-  1: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  2: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  3: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  4: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  5: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  6: {pokemon: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  1: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  2: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  3: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  4: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  5: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  6: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
 });
 
 let htmlButton = ref(false);
@@ -100,6 +100,7 @@ const buttonCssCopy = () => {
               :reverse="false"
               controlVariant="stacked"
               label="ポケモンの数"
+              autocomplete="off"
               :hideInput="false"
               :inset="false"
               :min="1"
@@ -116,18 +117,20 @@ const buttonCssCopy = () => {
               <v-col class="pb-0">
                 <v-autocomplete
                     label="ポケモン名"
+                    autocomplete="off"
                     :items="pkName"
-                    v-model="party[i]['pokemon']"
-                    @update:modelValue="changePkName(i, party[i]['pokemon'])"
+                    v-model="party[i]['pk_name']"
+                    @update:modelValue="changePkName(i, party[i]['pk_name'])"
                 ></v-autocomplete>
               </v-col>
               <v-col class="pb-0">
                 <v-select
                     label="性別"
+                    autocomplete="off"
                     :items="['♂', '♀']"
                     v-model="party[i]['gender']"
                     v-bind:disabled="genderList[i].length === 0"
-                    @update:modelValue="getImage(i, party[i]['pokemon'], party[i]['gender'])"
+                    @update:modelValue="getImage(i, party[i]['pk_name'], party[i]['gender'])"
                 ></v-select>
               </v-col>
             </v-row>
@@ -136,6 +139,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="自由入力欄"
+                    autocomplete="off"
                     v-model="party[i]['free']"
                 ></v-text-field>
               </v-col>
@@ -145,6 +149,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="技1"
+                    autocomplete="off"
                     v-model="party[i]['moves1']"
                 ></v-text-field>
               </v-col>
@@ -152,6 +157,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="技2"
+                    autocomplete="off"
                     v-model="party[i]['moves2']"
                 ></v-text-field>
               </v-col>
@@ -161,6 +167,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="技3"
+                    autocomplete="off"
                     v-model="party[i]['moves3']"
                 ></v-text-field>
               </v-col>
@@ -168,6 +175,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="技4"
+                    autocomplete="off"
                     v-model="party[i]['moves4']"
                 ></v-text-field>
               </v-col>
@@ -177,6 +185,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="特性"
+                    autocomplete="off"
                     v-model="party[i]['ability']"
                 ></v-text-field>
               </v-col>
@@ -184,6 +193,7 @@ const buttonCssCopy = () => {
                 <v-text-field
                     clearable
                     label="持ち物"
+                    autocomplete="off"
                     v-model="party[i]['item']"
                 ></v-text-field>
               </v-col>
@@ -202,7 +212,7 @@ const buttonCssCopy = () => {
               <table class="pk-party">
                 <tbody class="pk-party" v-bind:class="props.settingColor + '-' + (i % 2 + 1)" v-for="i in pkCount" :key="i">
                 <tr class="pk-party">
-                  <td class="pk-party image-area" rowspan="2"><img class="pk-party" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName[i] + '.png'" v-bind:alt="party[i]['pokemon']"></td>
+                  <td class="pk-party image-area" rowspan="2"><img class="pk-party" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName[i] + '.png'" v-bind:alt="party[i]['pk_name']"></td>
                   <td class="pk-party">{{ party[i]['moves1'] }}</td>
                   <td class="pk-party">{{ party[i]['moves2'] }}</td>
                 </tr>

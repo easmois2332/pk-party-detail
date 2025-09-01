@@ -11,6 +11,17 @@ export default class Pokemon {
         return this.pokemon.map((obj: any) => obj.name);
     }
 
+    getPokemon(name: string) {
+        let pkDetail = this.pokemon.find((obj: any) => obj.name === name);
+
+        if (pkDetail) {
+            return pkDetail.pokemon;
+        }
+
+        return null;
+    }
+
+
     getPkGenderList(name: string) {
         let pkDetail = this.pokemon.find((obj: any) => obj.name === name);
         let list = [];
