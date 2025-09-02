@@ -106,6 +106,7 @@ watch(() => props.detailData, () => {
     detail.value['moves3'] = props.detailData['moves3'];
     detail.value['moves4'] = props.detailData['moves4'];
     detail.value['free'] = props.detailData['free'];
+    detail.value['pokemon'] = pkClass.getPokemon(detail.value['pk_name']);
     genderList.value = pkClass.getPkGenderList(detail.value['pk_name']);
     getImage(detail.value['pk_name'], detail.value['gender']);
   }
