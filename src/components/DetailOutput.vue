@@ -50,8 +50,8 @@ const changePkName = (name) => {
 }
 
 // スクリーンショットを撮る
-const buttonScreenShot = async () => {
-  const el = document.querySelector('.output-image > table.pk-detail');
+const buttonScreenShot = async (query) => {
+  const el = document.querySelector(query);
   const canvasElement = await html2canvas(el, {proxy: true, useCORS: true}).catch(e => {
     console.error(e);
   });
@@ -70,7 +70,7 @@ const buttonScreenShot = async () => {
   })
 }
 
-// iframeをクリップボードにコピー
+// iframeをコピー
 const buttonIframeCopy = (query, type) => {
   let el = document.querySelector(query);
   let param = new URLSearchParams(JSON.stringify(detail.value));
@@ -80,7 +80,7 @@ const buttonIframeCopy = (query, type) => {
   setTimeout(() => (iframeButton.value[type] = false), 3000)
 }
 
-// HTMLをクリップボードにコピー
+// HTMLをコピー
 const buttonHtmlCopy = (query, type) => {
   let el = document.querySelector(query);
   navigator.clipboard.writeText(el.outerHTML);
@@ -88,7 +88,7 @@ const buttonHtmlCopy = (query, type) => {
   setTimeout(() => (htmlButton.value[type] = false), 3000)
 }
 
-// CSSリンクをクリップボードにコピー
+// CSSリンクをコピー
 const buttonCssCopy = (type) => {
   navigator.clipboard.writeText('<link href="https://easmois2332.github.io/pk-assets/css/detail_output.css" rel="stylesheet">');
   cssButton.value[type] = true;
@@ -358,32 +358,29 @@ watch(() => props.detailData, () => {
             </div>
             <v-col class="output-button-area pa-0">
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot">画像で保存</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot('.output-image.type-1 > table.pk-detail')">画像で保存</v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton[1]" @click="buttonIframeCopy('.output-image.type-1 > table.pk-detail', 1)">
-                  iframeをクリップボードにコピー
+                  iframeをコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                    コピーしました
                   </template>
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton[1]" @click="buttonHtmlCopy('.output-image.type-1 > table.pk-detail', 1)">
-                  HTMLをクリップボードにコピー
+                  HTMLをコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                    コピーしました
                   </template>
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton[1]" @click="buttonCssCopy(1)">
-                  CSSリンクをクリップボードにコピー
+                  CSSリンクをコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                    コピーしました
                   </template>
                 </v-btn>
               </div>
@@ -471,32 +468,29 @@ watch(() => props.detailData, () => {
             </div>
             <v-col class="output-button-area pa-0">
               <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot">画像で保存</v-btn>
+                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot('.output-image.type-2 > table.pk-detail')">画像で保存</v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton[2]" @click="buttonIframeCopy('.output-image.type-2 > table.pk-detail', 2)">
-                  iframeをクリップボードにコピー
+                  iframeをコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                    コピーしました
                   </template>
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton[2]" @click="buttonHtmlCopy('.output-image.type-2 > table.pk-detail', 2)">
-                  HTMLをクリップボードにコピー
+                  HTMLをコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                    コピーしました
                   </template>
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton[2]" @click="buttonCssCopy(2)">
-                  CSSリンクをクリップボードにコピー
+                  CSSリンクをコピー
                   <template v-slot:loader>
                     <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                    コピーしました
                   </template>
                 </v-btn>
               </div>

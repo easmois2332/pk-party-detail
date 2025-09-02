@@ -65,7 +65,7 @@ const buttonScreenShot = async () => {
   })
 }
 
-// iframeをクリップボードにコピー
+// iframeをコピー
 const buttonIframeCopy = () => {
   let el = document.querySelector('.output-image > table.pk-party');
   let param = new URLSearchParams(JSON.stringify(party.value));
@@ -75,7 +75,7 @@ const buttonIframeCopy = () => {
   setTimeout(() => (iframeButton.value = false), 3000)
 }
 
-// HTMLをクリップボードにコピー
+// HTMLをコピー
 const buttonHtmlCopy = () => {
   let el = document.querySelector('.output-image > table.pk-party');
   navigator.clipboard.writeText(el.outerHTML);
@@ -83,7 +83,7 @@ const buttonHtmlCopy = () => {
   setTimeout(() => (htmlButton.value = false), 3000)
 }
 
-// CSSリンクをクリップボードにコピー
+// CSSリンクをコピー
 const buttonCssCopy = () => {
   navigator.clipboard.writeText('<link href="https://easmois2332.github.io/pk-assets/css/party_output.css" rel="stylesheet">');
   cssButton.value = true;
@@ -234,25 +234,25 @@ const buttonCssCopy = () => {
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton" @click="buttonIframeCopy">
-                  iframeをクリップボードにコピー
+                  iframeをコピー
                   <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
                   </template>
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton" @click="buttonHtmlCopy">
-                  HTMLをクリップボードにコピー
+                  HTMLをコピー
                   <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
                   </template>
                 </v-btn>
               </div>
               <div class="output-button pt-2 pb-2">
                 <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton" @click="buttonCssCopy">
-                  CSSリンクをクリップボードにコピー
+                  CSSリンクをコピー
                   <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>コピーしました
+                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
                   </template>
                 </v-btn>
               </div>
