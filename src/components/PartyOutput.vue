@@ -127,7 +127,7 @@ const buttonCssCopy = () => {
                 <v-select
                     label="性別"
                     autocomplete="off"
-                    :items="['♂', '♀']"
+                    :items="genderList[i]"
                     v-model="party[i]['gender']"
                     v-bind:disabled="genderList[i].length === 0"
                     @update:modelValue="getImage(i, party[i]['pk_name'], party[i]['gender'])"
