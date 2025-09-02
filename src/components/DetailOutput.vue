@@ -452,16 +452,20 @@ watch(() => props.detailData, () => {
                   <td class="pk-detail">{{ detail['item'] }}</td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <td class="pk-detail" colspan="2">{{ detail['moves1'] }}</td>
+                  <th class="pk-detail">もっているわざ</th>
+                  <td class="pk-detail">{{ detail['moves1'] }}</td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <td class="pk-detail" colspan="2">{{ detail['moves2'] }}</td>
+                  <th class="pk-detail"></th>
+                  <td class="pk-detail">{{ detail['moves2'] }}</td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <td class="pk-detail" colspan="2">{{ detail['moves3'] }}</td>
+                  <th class="pk-detail"></th>
+                  <td class="pk-detail">{{ detail['moves3'] }}</td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <td class="pk-detail" colspan="2">{{ detail['moves4'] }}</td>
+                  <th class="pk-detail"></th>
+                  <td class="pk-detail">{{ detail['moves4'] }}</td>
                 </tr>
                 </tbody>
               </table>

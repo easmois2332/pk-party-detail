@@ -72,7 +72,7 @@ const getImage = (name, gender) => {
     <tr class="pk-detail" v-bind:class="color + '-1'">
       <th class="pk-detail">とくぼう</th>
       <td class="pk-detail">{{ detail['sp_defense'] }}</td>
-      <td class="pk-detail">{{ detail['free'] }}</td>
+      <td class="pk-detail">もっているわざ</td>
     </tr>
     <tr class="pk-detail" v-bind:class="color + '-2'">
       <th class="pk-detail">すばやさ</th>
@@ -157,16 +157,20 @@ const getImage = (name, gender) => {
       <td class="pk-detail">{{ detail['item'] }}</td>
     </tr>
     <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <td class="pk-detail" colspan="2">{{ detail['moves1'] }}</td>
+      <th class="pk-detail">もっているわざ</th>
+      <td class="pk-detail">{{ detail['moves1'] }}</td>
     </tr>
     <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <td class="pk-detail" colspan="2">{{ detail['moves2'] }}</td>
+      <th class="pk-detail"></th>
+      <td class="pk-detail">{{ detail['moves2'] }}</td>
     </tr>
     <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <td class="pk-detail" colspan="2">{{ detail['moves3'] }}</td>
+      <th class="pk-detail"></th>
+      <td class="pk-detail">{{ detail['moves3'] }}</td>
     </tr>
     <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <td class="pk-detail" colspan="2">{{ detail['moves4'] }}</td>
+      <th class="pk-detail"></th>
+      <td class="pk-detail">{{ detail['moves4'] }}</td>
     </tr>
     </tbody>
   </table>
