@@ -15,22 +15,22 @@ let imageName = ref('0000_000_uk_n_000');
 let detail = ref({
   pokemon: null,
   pk_name: null,
-  gender: null,
+  gender: '',
   level: 50,
-  nature: null,
-  ability: null,
-  item: null,
-  moves1: null,
-  moves2: null,
-  moves3: null,
-  moves4: null,
-  hp: null,
-  attack: null,
-  defense: null,
-  sp_attack: null,
-  sp_defense: null,
-  speed: null,
-  free: null,
+  nature: '',
+  ability: '',
+  item: '',
+  moves1: '',
+  moves2: '',
+  moves3: '',
+  moves4: '',
+  hp: '',
+  attack: '',
+  defense: '',
+  sp_attack: '',
+  sp_defense: '',
+  speed: '',
+  free: '',
   forms: false,
 });
 
@@ -301,9 +301,13 @@ watch(() => props.detailData, () => {
               <table class="pk-detail">
                 <thead class="pk-detail">
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-                  <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }} {{ detail['gender'] }}</th>
-                  <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }} {{ detail['gender'] }}</th>
+                  <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }}{{ detail['gender'] }}</th>
+                  <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }}{{ detail['gender'] }}</th>
                   <td class="pk-detail">Lv.{{ detail['level'] }}</td>
+                </tr>
+                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
+                  <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
+                  <td class="pk-detail"></td>
                 </tr>
                 </thead>
                 <tbody class="pk-detail">
@@ -327,7 +331,7 @@ watch(() => props.detailData, () => {
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
                   <th class="pk-detail">とくぼう</th>
                   <td class="pk-detail">{{ detail['sp_defense'] }}</td>
-                  <td class="pk-detail">{{ detail['free'] }}</td>
+                  <td class="pk-detail">もっているわざ</td>
                 </tr>
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
                   <th class="pk-detail">すばやさ</th>
@@ -393,12 +397,21 @@ watch(() => props.detailData, () => {
               <table class="pk-detail">
                 <thead class="pk-detail">
                 <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-                  <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }} {{ detail['gender'] }}</th>
-                  <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }} {{ detail['gender'] }}</th>
+                  <th class="pk-detail" colspan="2" v-if="detail['forms']">
+                    <div class="pk-detail head-area">
+                      <div class="pk-detail name-area">{{ detail['pk_name'] }}{{ detail['gender'] }}</div>
+                      <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
+                    </div>
+                  </th>
+                  <th class="pk-detail" colspan="2" v-else>
+                    <div class="pk-detail head-area">
+                      <div class="pk-detail name-area">{{ detail['pokemon'] }}{{ detail['gender'] }}</div>
+                      <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
+                    </div>
+                  </th>
                 </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-                  <th class="pk-detail">Lv.{{ detail['level'] }}</th>
-                  <th class="pk-detail">{{ detail['free'] }}</th>
+                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
+                  <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
                 </tr>
                 </thead>
                 <tbody class="pk-detail">

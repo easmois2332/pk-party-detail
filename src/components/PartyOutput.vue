@@ -18,12 +18,12 @@ let imageName = ref({
 
 let pkCount = ref(1);
 let party = ref({
-  1: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  2: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  3: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  4: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  5: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
-  6: {pk_name: null, gender: null, free: null, moves1: null, moves2: null, moves3: null, moves4: null, ability: null, item: null},
+  1: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
+  2: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
+  3: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
+  4: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
+  5: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
+  6: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
 });
 
 let htmlButton = ref(false);
