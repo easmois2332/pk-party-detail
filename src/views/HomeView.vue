@@ -26,4 +26,7 @@ const updateDetailData = (data) => {
       :detail-data="detailData"
     />
   </div>
+  <div class="content-area">
+    <span>使用している画像の著作権は権利者様へ帰属します。また、権利者様側からの画像等の削除の依頼、警告には速やかに対処いたします。</span>
+  </div>
 </template>

@@ -41,10 +41,14 @@ const getImage = (name, gender) => {
   </table>
   <table class="pk-detail" v-if="param['format'] === 'detail1'">
     <thead class="pk-detail">
-    <tr class="pk-detail" v-bind:class="color + '-3'">
-      <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }} {{ detail['gender'] }}</th>
-      <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }} {{ detail['gender'] }}</th>
+    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
+      <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }}{{ detail['gender'] }}</th>
+      <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }}{{ detail['gender'] }}</th>
       <td class="pk-detail">Lv.{{ detail['level'] }}</td>
+    </tr>
+    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
+      <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
+      <td class="pk-detail"></td>
     </tr>
     </thead>
     <tbody class="pk-detail">
@@ -95,12 +99,21 @@ const getImage = (name, gender) => {
   <table class="pk-detail" v-if="param['format'] === 'detail2'">
     <thead class="pk-detail">
     <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-      <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }} {{ detail['gender'] }}</th>
-      <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }} {{ detail['gender'] }}</th>
+      <th class="pk-detail" colspan="2" v-if="detail['forms']">
+        <div class="pk-detail head-area">
+          <div class="pk-detail name-area">{{ detail['pk_name'] }}{{ detail['gender'] }}</div>
+          <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
+        </div>
+      </th>
+      <th class="pk-detail" colspan="2" v-else>
+        <div class="pk-detail head-area">
+          <div class="pk-detail name-area">{{ detail['pokemon'] }}{{ detail['gender'] }}</div>
+          <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
+        </div>
+      </th>
     </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-      <th class="pk-detail">Lv.{{ detail['level'] }}</th>
-      <th class="pk-detail">{{ detail['free'] }}</th>
+    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
+      <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
     </tr>
     </thead>
     <tbody class="pk-detail">
