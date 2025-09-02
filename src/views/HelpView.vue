@@ -4,7 +4,97 @@ const props = defineProps(['settingColor']);
 </script>
 
 <template>
-  <h1>HelpPage</h1>
-  <iframe frameborder="no" scrolling="no" width="480" height="320" src="http://localhost:5173/iframe/detail1?color=blue&detail=%7B%22pokemon%22%3A%22%E3%82%AE%E3%83%A9%E3%83%86%E3%82%A3%E3%83%8A%22%2C%22pk_name%22%3A%22%E3%82%AE%E3%83%A9%E3%83%86%E3%82%A3%E3%83%8A%EF%BC%88%E3%82%A2%E3%83%8A%E3%82%B6%E3%83%BC%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A0%EF%BC%89%22%2C%22gender%22%3Anull%2C%22level%22%3A50%2C%22nature%22%3Anull%2C%22ability%22%3Anull%2C%22item%22%3Anull%2C%22moves1%22%3Anull%2C%22moves2%22%3Anull%2C%22moves3%22%3Anull%2C%22moves4%22%3Anull%2C%22hp%22%3Anull%2C%22attack%22%3Anull%2C%22defense%22%3Anull%2C%22sp_attack%22%3Anull%2C%22sp_defense%22%3Anull%2C%22speed%22%3Anull%2C%22free%22%3Anull%2C%22forms%22%3Atrue%7D"></iframe>
-  <iframe frameborder="no" scrolling="no" width="300" height="576" src="http://localhost:5173/iframe/detail2?color=blue&detail=%7B%22pokemon%22%3A%22%E3%82%AE%E3%83%A9%E3%83%86%E3%82%A3%E3%83%8A%22%2C%22pk_name%22%3A%22%E3%82%AE%E3%83%A9%E3%83%86%E3%82%A3%E3%83%8A%EF%BC%88%E3%82%A2%E3%83%8A%E3%82%B6%E3%83%BC%E3%83%95%E3%82%A9%E3%83%AB%E3%83%A0%EF%BC%89%22%2C%22gender%22%3Anull%2C%22level%22%3A50%2C%22nature%22%3Anull%2C%22ability%22%3Anull%2C%22item%22%3Anull%2C%22moves1%22%3Anull%2C%22moves2%22%3Anull%2C%22moves3%22%3Anull%2C%22moves4%22%3Anull%2C%22hp%22%3Anull%2C%22attack%22%3Anull%2C%22defense%22%3Anull%2C%22sp_attack%22%3Anull%2C%22sp_defense%22%3Anull%2C%22speed%22%3Anull%2C%22free%22%3Anull%2C%22forms%22%3Afalse%7D"></iframe>
+  <div class="content-area">
+    <v-card class="mb-4" title="本サイトについて">
+      <v-card-text>
+        <span>
+          構築詳細アウトプットは入力された情報を画像、表として出力するツールです。<br>
+          本サイトによって受けた損害については一切の責任を負いません。<br>
+          使用している画像の著作権は権利者様へ帰属します。また、権利者様側からの画像等の削除の依頼、警告には速やかに対処いたします。
+        </span>
+      </v-card-text>
+    </v-card>
+    <v-card class="mb-4" title="連絡先">
+      <v-card-text>
+        <a href="https://x.com/cs32kiy" target="_blank">@cs32kiy</a><span>(X)</span>
+      </v-card-text>
+    </v-card>
+    <v-card class="mb-4" title="推奨環境">
+      <v-card-text>
+        <span>
+          Google Chrome ブラウザ
+        </span>
+      </v-card-text>
+    </v-card>
+    <v-card class="mb-4" title="機能説明">
+      <v-card-text>
+        <div class="mb-4">
+          <span class="font-bold"><v-icon icon="mdi-cog"></v-icon>設定</span><br>
+          <span>
+            本サイトの設定ができます。<br>
+            設定したテーマカラーは出力される画像、表に反映されます。
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">構築詳細</span><br>
+          <span>
+            入力した情報を元に構築の一覧を出力できます。<br>
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">個別詳細</span><br>
+          <span>
+            入力した情報を元に個別詳細を出力できます。<br>
+            ある程度自由な入力を許可している為、自動で数値を算出する様な機能はありません。
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">画像で保存</span><br>
+          <span>
+            出力欄に表示されている内容を画像で保存します。<br>
+            表示内容そのままで保存する為、横幅の狭いスマートフォン端末など、内容が見切れている状態で保存すると見切れている状態で保存されます。<br>
+            スマートフォンを横持ちにし、内容が見切れないようにして保存するか、タブレット端末、PC端末などをご利用ください。
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">IFRAMEをコピー</span><br>
+          <span>
+            出力欄に表示されている内容を表示するiframeタグをクリップボードにコピーします。<br>
+            表示内容に合わせたwidthとheightを計算しています。貼り付け先のブログなどに合わせて調整していください。
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">HTMLをコピー</span><br>
+          <span>
+            出力欄に表示されている内容のHTMLをクリップボードにコピーします。<br>
+            別途CSSの設定が必要になります。後述のCSSリンクを貼り付け先のブログに設定してください。
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">CSSリンクをコピー</span><br>
+          <span>
+            CSSリンクをクリップボードにコピーします。<br>
+            HTMLを使用する場合に貼り付け先のブログに設定してください。
+          </span>
+        </div>
+        <div class="mb-4 ml-4">
+          <span class="font-bold">はてなブログへのCSSリンクの設置方法</span><br>
+          <span>
+            「ブログを管理」から「設定」>「詳細設定」へアクセス。<br>
+            「head内タグ」の「&lt;head&gt;要素にメタデータを追加」にコピーしたCSSリンクを貼り付けて保存。
+          </span>
+        </div>
+      </v-card-text>
+    </v-card>
+    <v-card class="mb-4" title="更新履歴">
+      <v-card-text>
+        <div>
+          <span class="font-bold">v1.0.0</span><br>
+          <span>
+            リリース
+          </span>
+        </div>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
