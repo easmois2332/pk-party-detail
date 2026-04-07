@@ -53,7 +53,8 @@ const props = defineProps(['settingColor']);
           <span>
             出力欄に表示されている内容を画像で保存します。<br>
             表示内容そのままで保存する為、横幅の狭いスマートフォン端末など、内容が見切れている状態で保存すると見切れている状態で保存されます。<br>
-            スマートフォンを横持ちにし、内容が見切れないようにして保存するか、タブレット端末、PC端末などをご利用ください。
+            スマートフォンを横持ちにし、内容が見切れないようにして保存するか、タブレット端末、PC端末などをご利用ください。<br>
+            ブラウザをズームして保存すると画像のサイズも大きくなります。
           </span>
         </div>
         <div class="mb-4">
@@ -77,7 +78,7 @@ const props = defineProps(['settingColor']);
             HTMLを使用する場合に貼り付け先のブログに設定してください。
           </span>
         </div>
-        <div class="mb-4 ml-4">
+        <div class="mb-4">
           <span class="font-bold">はてなブログへのCSSリンクの設置方法</span><br>
           <span>
             「ブログを管理」から「設定」>「詳細設定」へアクセス。<br>
@@ -87,6 +88,16 @@ const props = defineProps(['settingColor']);
       </v-card-text>
     </v-card>
     <v-card class="mb-4" title="更新履歴">
+      <v-card-text>
+        <div>
+          <span class="font-bold">v1.1.0</span><br>
+          <span>
+            「Pokémon LEGENDS Z-A」で追加されたメガシンカを追加<br>
+            「バケッチャ」「パンプジン」のフォルム名を「Pokémon LEGENDS Z-A」以降のものに変更<br>
+            「構築詳細」の出力デザインを調整
+          </span>
+        </div>
+      </v-card-text>
       <v-card-text>
         <div>
           <span class="font-bold">v1.0.0</span><br>
