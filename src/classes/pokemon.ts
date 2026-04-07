@@ -12,6 +12,7 @@ export default class Pokemon {
     }
 
     getPokemon(name: string) {
+        name = this.fixName(name);
         let pkDetail = this.pokemon.find((obj: any) => obj.name === name);
 
         if (pkDetail) {
@@ -23,6 +24,7 @@ export default class Pokemon {
 
 
     getPkGenderList(name: string) {
+        name = this.fixName(name);
         let pkDetail = this.pokemon.find((obj: any) => obj.name === name);
         let list = [];
 
@@ -39,6 +41,7 @@ export default class Pokemon {
     }
 
     getPkImage(name: string, gender: string) {
+        name = this.fixName(name);
         let pkDetail = this.pokemon.find((obj: any) => obj.name === name);
         let image = {
             "dex": '0000',
@@ -86,5 +89,34 @@ export default class Pokemon {
         }
 
         return image.dex + '_' + image.forms_id + '_' + image.gender + '_n_' + image.extra_id;
+    }
+
+    private fixName(name: string) {
+        if (name === 'バケッチャ（ふつうのサイズ）') {
+            return 'バケッチャ（ちゅうだましゅ）';
+        }
+        if (name === 'バケッチャ（ちいさいサイズ）') {
+            return 'バケッチャ（こだましゅ）';
+        }
+        if (name === 'バケッチャ（おおきいサイズ）') {
+            return 'バケッチャ（おおだましゅ）';
+        }
+        if (name === 'バケッチャ（とくだいサイズ）') {
+            return 'バケッチャ（ギガだましゅ）';
+        }
+        if (name === 'パンプジン（ふつうのサイズ）') {
+            return 'パンプジン（ちゅうだましゅ）';
+        }
+        if (name === 'パンプジン（ちいさいサイズ）') {
+            return 'パンプジン（こだましゅ）';
+        }
+        if (name === 'パンプジン（おおきいサイズ）') {
+            return 'パンプジン（おおだましゅ）';
+        }
+        if (name === 'パンプジン（とくだいサイズ）') {
+            return 'パンプジン（ギガだましゅ）';
+        }
+
+        return name;
     }
 }

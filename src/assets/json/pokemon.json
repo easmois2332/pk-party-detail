@@ -450,6 +450,26 @@
     "extra_id": 0
   },
   {
+    "dex": 26,
+    "forms_id": 2,
+    "pokemon": "メガライチュウＸ",
+    "name": "メガライチュウＸ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 26,
+    "forms_id": 3,
+    "pokemon": "メガライチュウＹ",
+    "name": "メガライチュウＹ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 27,
     "forms_id": 0,
     "pokemon": "サンド",
@@ -564,6 +584,16 @@
     "forms_id": 0,
     "pokemon": "ピクシー",
     "name": "ピクシー",
+    "male": 1,
+    "female": 3,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 36,
+    "forms_id": 1,
+    "pokemon": "メガピクシー",
+    "name": "メガピクシー",
     "male": 1,
     "female": 3,
     "gender_differences": 0,
@@ -1014,6 +1044,16 @@
     "forms_id": 0,
     "pokemon": "ウツボット",
     "name": "ウツボット",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 71,
+    "forms_id": 1,
+    "pokemon": "メガウツボット",
+    "name": "メガウツボット",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -1700,6 +1740,16 @@
     "extra_id": 0
   },
   {
+    "dex": 121,
+    "forms_id": 1,
+    "pokemon": "メガスターミー",
+    "name": "メガスターミー",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 122,
     "forms_id": 0,
     "pokemon": "バリヤード",
@@ -2080,6 +2130,16 @@
     "extra_id": 0
   },
   {
+    "dex": 149,
+    "forms_id": 1,
+    "pokemon": "メガカイリュー",
+    "name": "メガカイリュー",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 150,
     "forms_id": 0,
     "pokemon": "ミュウツー",
@@ -2150,6 +2210,16 @@
     "extra_id": 0
   },
   {
+    "dex": 154,
+    "forms_id": 1,
+    "pokemon": "メガメガニウム",
+    "name": "メガメガニウム",
+    "male": 7,
+    "female": 1,
+    "gender_differences": 1,
+    "extra_id": 0
+  },
+  {
     "dex": 155,
     "forms_id": 0,
     "pokemon": "ヒノアラシ",
@@ -2214,6 +2284,16 @@
     "forms_id": 0,
     "pokemon": "オーダイル",
     "name": "オーダイル",
+    "male": 7,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 160,
+    "forms_id": 1,
+    "pokemon": "メガオーダイル",
+    "name": "メガオーダイル",
     "male": 7,
     "female": 1,
     "gender_differences": 0,
@@ -3244,6 +3324,16 @@
     "forms_id": 0,
     "pokemon": "エアームド",
     "name": "エアームド",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 227,
+    "forms_id": 1,
+    "pokemon": "メガエアームド",
+    "name": "メガエアームド",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -4760,6 +4850,16 @@
     "extra_id": 0
   },
   {
+    "dex": 358,
+    "forms_id": 1,
+    "pokemon": "メガチリーン",
+    "name": "メガチリーン",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 359,
     "forms_id": 0,
     "pokemon": "アブソル",
@@ -4774,6 +4874,16 @@
     "forms_id": 1,
     "pokemon": "メガアブソル",
     "name": "メガアブソル",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 359,
+    "forms_id": 2,
+    "pokemon": "メガアブソルＺ",
+    "name": "メガアブソルＺ",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -5274,6 +5384,16 @@
     "forms_id": 0,
     "pokemon": "ムクホーク",
     "name": "ムクホーク",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 1,
+    "extra_id": 0
+  },
+  {
+    "dex": 398,
+    "forms_id": 1,
+    "pokemon": "メガムクホーク",
+    "name": "メガムクホーク",
     "male": 1,
     "female": 1,
     "gender_differences": 1,
@@ -5840,6 +5960,16 @@
     "extra_id": 0
   },
   {
+    "dex": 445,
+    "forms_id": 2,
+    "pokemon": "メガガブリアスＺ",
+    "name": "メガガブリアスＺ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 446,
     "forms_id": 0,
     "pokemon": "ゴンベ",
@@ -5874,6 +6004,16 @@
     "forms_id": 1,
     "pokemon": "メガルカリオ",
     "name": "メガルカリオ",
+    "male": 7,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 448,
+    "forms_id": 2,
+    "pokemon": "メガルカリオＺ",
+    "name": "メガルカリオＺ",
     "male": 7,
     "female": 1,
     "gender_differences": 0,
@@ -6200,6 +6340,16 @@
     "extra_id": 0
   },
   {
+    "dex": 478,
+    "forms_id": 1,
+    "pokemon": "メガユキメノコ",
+    "name": "メガユキメノコ",
+    "male": 0,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 479,
     "forms_id": 0,
     "pokemon": "ロトム",
@@ -6340,6 +6490,16 @@
     "extra_id": 0
   },
   {
+    "dex": 485,
+    "forms_id": 1,
+    "pokemon": "メガヒードラン",
+    "name": "メガヒードラン",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 486,
     "forms_id": 0,
     "pokemon": "レジギガス",
@@ -6404,6 +6564,16 @@
     "forms_id": 0,
     "pokemon": "ダークライ",
     "name": "ダークライ",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 491,
+    "forms_id": 1,
+    "pokemon": "メガダークライ",
+    "name": "メガダークライ",
     "male": 0,
     "female": 0,
     "gender_differences": 0,
@@ -6674,6 +6844,16 @@
     "forms_id": 0,
     "pokemon": "エンブオー",
     "name": "エンブオー",
+    "male": 7,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 500,
+    "forms_id": 1,
+    "pokemon": "メガエンブオー",
+    "name": "メガエンブオー",
     "male": 7,
     "female": 1,
     "gender_differences": 0,
@@ -6990,6 +7170,16 @@
     "extra_id": 0
   },
   {
+    "dex": 530,
+    "forms_id": 1,
+    "pokemon": "メガドリュウズ",
+    "name": "メガドリュウズ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 531,
     "forms_id": 0,
     "pokemon": "タブンネ",
@@ -7144,6 +7334,16 @@
     "forms_id": 0,
     "pokemon": "ペンドラー",
     "name": "ペンドラー",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 545,
+    "forms_id": 1,
+    "pokemon": "メガペンドラー",
+    "name": "メガペンドラー",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -7364,6 +7564,16 @@
     "forms_id": 0,
     "pokemon": "ズルズキン",
     "name": "ズルズキン",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 560,
+    "forms_id": 1,
+    "pokemon": "メガズルズキン",
+    "name": "メガズルズキン",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -7890,6 +8100,16 @@
     "extra_id": 0
   },
   {
+    "dex": 604,
+    "forms_id": 1,
+    "pokemon": "メガシビルドン",
+    "name": "メガシビルドン",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 605,
     "forms_id": 0,
     "pokemon": "リグレー",
@@ -7934,6 +8154,16 @@
     "forms_id": 0,
     "pokemon": "シャンデラ",
     "name": "シャンデラ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 609,
+    "forms_id": 1,
+    "pokemon": "メガシャンデラ",
+    "name": "メガシャンデラ",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -8074,6 +8304,16 @@
     "forms_id": 0,
     "pokemon": "ゴルーグ",
     "name": "ゴルーグ",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 623,
+    "forms_id": 1,
+    "pokemon": "メガゴルーグ",
+    "name": "メガゴルーグ",
     "male": 0,
     "female": 0,
     "gender_differences": 0,
@@ -8490,6 +8730,16 @@
     "extra_id": 0
   },
   {
+    "dex": 652,
+    "forms_id": 1,
+    "pokemon": "メガブリガロン",
+    "name": "メガブリガロン",
+    "male": 7,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 653,
     "forms_id": 0,
     "pokemon": "フォッコ",
@@ -8514,6 +8764,16 @@
     "forms_id": 0,
     "pokemon": "マフォクシー",
     "name": "マフォクシー",
+    "male": 7,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 655,
+    "forms_id": 1,
+    "pokemon": "メガマフォクシー",
+    "name": "メガマフォクシー",
     "male": 7,
     "female": 1,
     "gender_differences": 0,
@@ -8556,6 +8816,16 @@
     "name": "サトシゲッコウガ",
     "male": 1,
     "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 658,
+    "forms_id": 2,
+    "pokemon": "メガゲッコウガ",
+    "name": "メガゲッコウガ",
+    "male": 7,
+    "female": 1,
     "gender_differences": 0,
     "extra_id": 0
   },
@@ -8850,6 +9120,16 @@
     "extra_id": 0
   },
   {
+    "dex": 668,
+    "forms_id": 1,
+    "pokemon": "メガカエンジシ",
+    "name": "メガカエンジシ",
+    "male": 1,
+    "female": 3,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 669,
     "forms_id": 0,
     "pokemon": "フラベベ",
@@ -8944,6 +9224,26 @@
     "forms_id": 4,
     "pokemon": "フラエッテ",
     "name": "フラエッテ（しろいはな）",
+    "male": 0,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 670,
+    "forms_id": 5,
+    "pokemon": "フラエッテ",
+    "name": "フラエッテ（えいえんのはな）",
+    "male": 0,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 670,
+    "forms_id": 6,
+    "pokemon": "メガフラエッテ",
+    "name": "メガフラエッテ",
     "male": 0,
     "female": 1,
     "gender_differences": 0,
@@ -9170,6 +9470,16 @@
     "extra_id": 0
   },
   {
+    "dex": 678,
+    "forms_id": 2,
+    "pokemon": "メガニャオニクス",
+    "name": "メガニャオニクス",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 679,
     "forms_id": 0,
     "pokemon": "ヒトツキ",
@@ -9270,6 +9580,16 @@
     "extra_id": 0
   },
   {
+    "dex": 687,
+    "forms_id": 1,
+    "pokemon": "メガカラマネロ",
+    "name": "メガカラマネロ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 688,
     "forms_id": 0,
     "pokemon": "カメテテ",
@@ -9290,6 +9610,16 @@
     "extra_id": 0
   },
   {
+    "dex": 689,
+    "forms_id": 1,
+    "pokemon": "メガガメノデス",
+    "name": "メガガメノデス",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 690,
     "forms_id": 0,
     "pokemon": "クズモー",
@@ -9304,6 +9634,16 @@
     "forms_id": 0,
     "pokemon": "ドラミドロ",
     "name": "ドラミドロ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 691,
+    "forms_id": 1,
+    "pokemon": "メガドラミドロ",
+    "name": "メガドラミドロ",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9404,6 +9744,16 @@
     "forms_id": 0,
     "pokemon": "ルチャブル",
     "name": "ルチャブル",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 701,
+    "forms_id": 1,
+    "pokemon": "メガルチャブル",
+    "name": "メガルチャブル",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9513,7 +9863,7 @@
     "dex": 710,
     "forms_id": 0,
     "pokemon": "バケッチャ",
-    "name": "バケッチャ（ふつうのサイズ）",
+    "name": "バケッチャ（ちゅうだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9523,7 +9873,7 @@
     "dex": 710,
     "forms_id": 1,
     "pokemon": "バケッチャ",
-    "name": "バケッチャ（ちいさいサイズ）",
+    "name": "バケッチャ（こだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9533,7 +9883,7 @@
     "dex": 710,
     "forms_id": 2,
     "pokemon": "バケッチャ",
-    "name": "バケッチャ（おおきいサイズ）",
+    "name": "バケッチャ（おおだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9543,7 +9893,7 @@
     "dex": 710,
     "forms_id": 3,
     "pokemon": "バケッチャ",
-    "name": "バケッチャ（とくだいサイズ）",
+    "name": "バケッチャ（ギガだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9553,7 +9903,7 @@
     "dex": 711,
     "forms_id": 0,
     "pokemon": "パンプジン",
-    "name": "パンプジン（ふつうのサイズ）",
+    "name": "パンプジン（ちゅうだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9563,7 +9913,7 @@
     "dex": 711,
     "forms_id": 1,
     "pokemon": "パンプジン",
-    "name": "パンプジン（ちいさいサイズ）",
+    "name": "パンプジン（こだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9573,7 +9923,7 @@
     "dex": 711,
     "forms_id": 2,
     "pokemon": "パンプジン",
-    "name": "パンプジン（おおきいサイズ）",
+    "name": "パンプジン（おおだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9583,7 +9933,7 @@
     "dex": 711,
     "forms_id": 3,
     "pokemon": "パンプジン",
-    "name": "パンプジン（とくだいサイズ）",
+    "name": "パンプジン（ギガだましゅ）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -9694,6 +10044,16 @@
     "forms_id": 2,
     "pokemon": "ジガルデ",
     "name": "ジガルデ（パーフェクトフォルム）",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 718,
+    "forms_id": 3,
+    "pokemon": "メガジガルデ",
+    "name": "メガジガルデ",
     "male": 0,
     "female": 0,
     "gender_differences": 0,
@@ -9944,6 +10304,16 @@
     "forms_id": 0,
     "pokemon": "ケケンカニ",
     "name": "ケケンカニ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 740,
+    "forms_id": 1,
+    "pokemon": "メガケケンカニ",
+    "name": "メガケケンカニ",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -10284,6 +10654,16 @@
     "forms_id": 0,
     "pokemon": "グソクムシャ",
     "name": "グソクムシャ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 768,
+    "forms_id": 1,
+    "pokemon": "メガグソクムシャ",
+    "name": "メガグソクムシャ",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -10660,6 +11040,16 @@
     "extra_id": 0
   },
   {
+    "dex": 780,
+    "forms_id": 1,
+    "pokemon": "メガジジーロン",
+    "name": "メガジジーロン",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 781,
     "forms_id": 0,
     "pokemon": "ダダリン",
@@ -10910,6 +11300,26 @@
     "extra_id": 0
   },
   {
+    "dex": 801,
+    "forms_id": 2,
+    "pokemon": "メガマギアナ",
+    "name": "メガマギアナ",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 801,
+    "forms_id": 3,
+    "pokemon": "メガマギアナ",
+    "name": "メガマギアナ（５００ねんまえのいろ）",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 802,
     "forms_id": 0,
     "pokemon": "マーシャドー",
@@ -10964,6 +11374,16 @@
     "forms_id": 0,
     "pokemon": "ゼラオラ",
     "name": "ゼラオラ",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 807,
+    "forms_id": 1,
+    "pokemon": "メガゼラオラ",
+    "name": "メガゼラオラ",
     "male": 0,
     "female": 0,
     "gender_differences": 0,
@@ -12270,6 +12690,16 @@
     "extra_id": 0
   },
   {
+    "dex": 870,
+    "forms_id": 1,
+    "pokemon": "メガタイレーツ",
+    "name": "メガタイレーツ",
+    "male": 0,
+    "female": 0,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 871,
     "forms_id": 0,
     "pokemon": "バチンウニ",
@@ -13270,6 +13700,16 @@
     "extra_id": 0
   },
   {
+    "dex": 952,
+    "forms_id": 1,
+    "pokemon": "メガスコヴィラン",
+    "name": "メガスコヴィラン",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 953,
     "forms_id": 0,
     "pokemon": "シガロコ",
@@ -13460,6 +13900,16 @@
     "extra_id": 0
   },
   {
+    "dex": 970,
+    "forms_id": 1,
+    "pokemon": "メガキラフロル",
+    "name": "メガキラフロル",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
     "dex": 971,
     "forms_id": 0,
     "pokemon": "ボチ",
@@ -13554,6 +14004,36 @@
     "forms_id": 2,
     "pokemon": "シャリタツ",
     "name": "シャリタツ（のびたすがた）",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 978,
+    "forms_id": 3,
+    "pokemon": "メガシャリタツ",
+    "name": "メガシャリタツ（そったすがた）",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 978,
+    "forms_id": 4,
+    "pokemon": "メガシャリタツ",
+    "name": "メガシャリタツ（たれたすがた）",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 978,
+    "forms_id": 5,
+    "pokemon": "メガシャリタツ",
+    "name": "メガシャリタツ（のびたすがた）",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
@@ -13764,6 +14244,16 @@
     "forms_id": 0,
     "pokemon": "セグレイブ",
     "name": "セグレイブ",
+    "male": 1,
+    "female": 1,
+    "gender_differences": 0,
+    "extra_id": 0
+  },
+  {
+    "dex": 998,
+    "forms_id": 1,
+    "pokemon": "メガセグレイブ",
+    "name": "メガセグレイブ",
     "male": 1,
     "female": 1,
     "gender_differences": 0,
