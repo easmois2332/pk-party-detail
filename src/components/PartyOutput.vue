@@ -212,7 +212,10 @@ const buttonCssCopy = () => {
               <table class="pk-party">
                 <tbody class="pk-party" v-bind:class="props.settingColor + '-' + (i % 2 + 1)" v-for="i in pkCount" :key="i">
                 <tr class="pk-party">
-                  <td class="pk-party image-area" rowspan="2"><img class="pk-party" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName[i] + '.png'" v-bind:alt="party[i]['pk_name']"></td>
+                  <td class="pk-party image-area" rowspan="2">
+                    <img class="pk-party icon" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Icon/pokeball_icon_000.png'">
+                    <img class="pk-party pokemon" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName[i] + '.png'" v-bind:alt="party[i]['pk_name']">
+                  </td>
                   <td class="pk-party">{{ party[i]['moves1'] }}</td>
                   <td class="pk-party">{{ party[i]['moves2'] }}</td>
                 </tr>
