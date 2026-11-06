@@ -1,19 +1,22 @@
 <script setup>
 import {useRoute} from "vue-router";
 import pokemon from "@/classes/pokemon.js"
-import {ref} from "vue";
+import OutputDetailType1 from "@/components/OutputDetailType1.vue";
+import OutputDetailType2 from "@/components/OutputDetailType2.vue";
+import OutputPartyType1 from "@/components/OutputPartyType1.vue";
+import OutputPartyType2 from "@/components/OutputPartyType2.vue";
+import OutputPartyType3 from "@/components/OutputPartyType3.vue";
 
 const route = useRoute();
-const props = defineProps(['settingColor']);
 const pkClass = new pokemon();
 
 let param = route.params;
 let query = route.query;
 
-let color = query['color'] ? query['color'] : props.settingColor;
-let pkCount = query['pkCount'] ? Number(query['pkCount']) : 0;
-let party = query['party'] ? JSON.parse(query['party']) : null;
+let color = query['color'] ? query['color'] : 'blue';
 let detail = query['detail'] ? JSON.parse(query['detail']) : null;
+let party = query['party'] ? JSON.parse(query['party']) : null;
+let pkCount = query['pkCount'] ? Number(query['pkCount']) : 0;
 
 const getImage = (name, gender) => {
   return pkClass.getPkImage(name, gender);
@@ -21,6 +24,11 @@ const getImage = (name, gender) => {
 </script>
 
 <template>
+  <OutputDetailType1 v-model="detail" v-model:color="color" v-if="param['format'] === 'detail1'"/>
+  <OutputDetailType2 v-model="detail" v-model:color="color" v-if="param['format'] === 'detail2'"/>
+  <OutputPartyType1 v-model="party" v-model:color="color" v-if="param['format'] === 'party1'"/>
+  <OutputPartyType2 v-model="party" v-model:color="color" v-if="param['format'] === 'party2'"/>
+  <OutputPartyType3 v-model="party" v-model:color="color" v-if="param['format'] === 'party3'"/>
   <table class="pk-party" v-if="param['format'] === 'party'">
     <tbody class="pk-party" v-bind:class="color + '-' + (i % 2 + 1)" v-for="i in pkCount" :key="i">
     <tr class="pk-party">
@@ -39,141 +47,6 @@ const getImage = (name, gender) => {
       <td class="pk-party free">{{ party[i]['free'] }}</td>
       <td class="pk-party">{{ party[i]['ability'] }}</td>
       <td class="pk-party">{{ party[i]['item'] }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <table class="pk-detail" v-if="param['format'] === 'detail1'">
-    <thead class="pk-detail">
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-      <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }}{{ detail['gender'] }}</th>
-      <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }}{{ detail['gender'] }}</th>
-      <td class="pk-detail">Lv.{{ detail['level'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
-      <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
-      <td class="pk-detail"></td>
-    </tr>
-    </thead>
-    <tbody class="pk-detail">
-    <tr class="pk-detail" v-bind:class="color + '-1'">
-      <th class="pk-detail">HP</th>
-      <td class="pk-detail">{{ detail['hp'] }}</td>
-      <td class="pk-detail image-area" rowspan="4"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + getImage(detail['pk_name'], detail['gender']) + '.png'" v-bind:alt="detail['pk_name']"></td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-2'">
-      <th class="pk-detail">こうげき</th>
-      <td class="pk-detail">{{ detail['attack'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-1'">
-      <th class="pk-detail">ぼうぎょ</th>
-      <td class="pk-detail">{{ detail['defense'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-2'">
-      <th class="pk-detail">とくこう</th>
-      <td class="pk-detail">{{ detail['sp_attack'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-1'">
-      <th class="pk-detail">とくぼう</th>
-      <td class="pk-detail">{{ detail['sp_defense'] }}</td>
-      <td class="pk-detail">もっているわざ</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-2'">
-      <th class="pk-detail">すばやさ</th>
-      <td class="pk-detail">{{ detail['speed'] }}</td>
-      <td class="pk-detail">{{ detail['moves1'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-1'">
-      <th class="pk-detail">せいかく</th>
-      <td class="pk-detail">{{ detail['nature'] }}</td>
-      <td class="pk-detail">{{ detail['moves2'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-2'">
-      <th class="pk-detail">とくせい</th>
-      <td class="pk-detail">{{ detail['ability'] }}</td>
-      <td class="pk-detail">{{ detail['moves3'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="color + '-1'">
-      <th class="pk-detail">もちもの</th>
-      <td class="pk-detail">{{ detail['item'] }}</td>
-      <td class="pk-detail">{{ detail['moves4'] }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <table class="pk-detail" v-if="param['format'] === 'detail2'">
-    <thead class="pk-detail">
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-      <th class="pk-detail" colspan="2" v-if="detail['forms']">
-        <div class="pk-detail head-area">
-          <div class="pk-detail name-area">{{ detail['pk_name'] }}{{ detail['gender'] }}</div>
-          <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
-        </div>
-      </th>
-      <th class="pk-detail" colspan="2" v-else>
-        <div class="pk-detail head-area">
-          <div class="pk-detail name-area">{{ detail['pokemon'] }}{{ detail['gender'] }}</div>
-          <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
-        </div>
-      </th>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
-      <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
-    </tr>
-    </thead>
-    <tbody class="pk-detail">
-    <tr class="pk-detail">
-      <td class="pk-detail image-area" colspan="2"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + getImage(detail['pk_name'], detail['gender']) + '.png'" v-bind:alt="detail['pk_name']"></td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail">HP</th>
-      <td class="pk-detail">{{ detail['hp'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <th class="pk-detail">こうげき</th>
-      <td class="pk-detail">{{ detail['attack'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail">ぼうぎょ</th>
-      <td class="pk-detail">{{ detail['defense'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <th class="pk-detail">とくこう</th>
-      <td class="pk-detail">{{ detail['sp_attack'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail">とくぼう</th>
-      <td class="pk-detail">{{ detail['sp_defense'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <th class="pk-detail">すばやさ</th>
-      <td class="pk-detail">{{ detail['speed'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail">せいかく</th>
-      <td class="pk-detail">{{ detail['nature'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <th class="pk-detail">とくせい</th>
-      <td class="pk-detail">{{ detail['ability'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail">もちもの</th>
-      <td class="pk-detail">{{ detail['item'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <th class="pk-detail">もっているわざ</th>
-      <td class="pk-detail">{{ detail['moves1'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail"></th>
-      <td class="pk-detail">{{ detail['moves2'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-      <th class="pk-detail"></th>
-      <td class="pk-detail">{{ detail['moves3'] }}</td>
-    </tr>
-    <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-      <th class="pk-detail"></th>
-      <td class="pk-detail">{{ detail['moves4'] }}</td>
     </tr>
     </tbody>
   </table>

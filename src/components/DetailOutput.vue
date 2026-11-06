@@ -1,53 +1,27 @@
 <script setup>
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import html2canvas from "html2canvas";
-import pokemon from "@/classes/pokemon.js"
-import nature from "@/assets/json/nature.json"
+import OutputDetailType1 from "@/components/OutputDetailType1.vue";
+import OutputDetailType2 from "@/components/OutputDetailType2.vue";
 
-const props = defineProps(['settingColor', 'detailData']);
-const pkClass = new pokemon();
-
-const pkName = pkClass.getPkNameList();
-
-let genderList = ref([]);
-let imageName = ref('0000_000_uk_n_000');
-
-let detail = ref({
-  pokemon: null,
-  pk_name: null,
-  gender: '',
-  level: 50,
-  nature: '',
-  ability: '',
-  item: '',
-  moves1: '',
-  moves2: '',
-  moves3: '',
-  moves4: '',
-  hp: '',
-  attack: '',
-  defense: '',
-  sp_attack: '',
-  sp_defense: '',
-  speed: '',
-  free: '',
-  forms: false,
-});
+const detail = defineModel({required: true});
+const type = ref('type1');
+const typeItems = [
+  {title: '横長', value: 'type1'},
+  {title: '縦長', value: 'type2'},
+];
+const color = ref('blue');
+const colorItems = [
+  {title: '赤', value: 'red'},
+  {title: '緑', value: 'green'},
+  {title: '青', value: 'blue'},
+  {title: '黄', value: 'amber'},
+  {title: '茶', value: 'brown'},
+  {title: '灰', value: 'blue-grey'},
+];
 
 let iframeButton = ref({});
 let htmlButton = ref({});
-let cssButton = ref({});
-
-const getImage = (name, gender) => {
-  imageName.value = pkClass.getPkImage(name, gender);
-}
-
-const changePkName = (name) => {
-  genderList.value = pkClass.getPkGenderList(name);
-  detail.value['pokemon'] = pkClass.getPokemon(name);
-  detail.value['gender'] = null;
-  getImage(name, detail.value['gender']);
-}
 
 // スクリーンショットを撮る
 const buttonScreenShot = async (query) => {
@@ -71,435 +45,126 @@ const buttonScreenShot = async (query) => {
 }
 
 // iframeをコピー
-const buttonIframeCopy = (query, type) => {
+const buttonIframeCopy = (query, type, i) => {
   let el = document.querySelector(query);
-  let param = new URLSearchParams(JSON.stringify(detail.value));
-  let url = document.location.href + 'iframe/detail' + type + '?color=' + props.settingColor + '&detail=' + param.toString().replace('=', '')
+  let param = new URLSearchParams(JSON.stringify(detail.value[i]));
+  let url = document.location.href + 'iframe/detail' + type + '?color=' + color.value + '&detail=' + param.toString().replace('=', '')
   navigator.clipboard.writeText('<iframe frameborder="no" scrolling="no" width="' + el.clientWidth + '" height="' + el.clientHeight + '" src="' + url + '"></iframe>');
-  iframeButton.value[type] = true;
-  setTimeout(() => (iframeButton.value[type] = false), 3000)
+  iframeButton.value[i] = true;
+  setTimeout(() => (iframeButton.value[i] = false), 3000)
 }
 
 // HTMLをコピー
-const buttonHtmlCopy = (query, type) => {
+const buttonHtmlCopy = (query, type, i) => {
   let el = document.querySelector(query);
   navigator.clipboard.writeText(el.outerHTML);
-  htmlButton.value[type] = true;
-  setTimeout(() => (htmlButton.value[type] = false), 3000)
+  htmlButton.value[i] = true;
+  setTimeout(() => (htmlButton.value[i] = false), 3000)
 }
-
-// CSSリンクをコピー
-const buttonCssCopy = (type) => {
-  navigator.clipboard.writeText('<link href="https://easmois2332.github.io/pk-assets/css/detail_output.css" rel="stylesheet">');
-  cssButton.value[type] = true;
-  setTimeout(() => (cssButton.value[type] = false), 3000)
-}
-
-watch(() => props.detailData, () => {
-  if (props.detailData !== null) {
-    detail.value['pk_name'] = props.detailData['pk_name'];
-    detail.value['gender'] = props.detailData['gender'];
-    detail.value['ability'] = props.detailData['ability'];
-    detail.value['item'] = props.detailData['item'];
-    detail.value['moves1'] = props.detailData['moves1'];
-    detail.value['moves2'] = props.detailData['moves2'];
-    detail.value['moves3'] = props.detailData['moves3'];
-    detail.value['moves4'] = props.detailData['moves4'];
-    detail.value['free'] = props.detailData['free'];
-    detail.value['pokemon'] = pkClass.getPokemon(detail.value['pk_name']);
-    genderList.value = pkClass.getPkGenderList(detail.value['pk_name']);
-    getImage(detail.value['pk_name'], detail.value['gender']);
-  }
-});
 </script>
 
 <template>
-  <v-card class="detail-output-area" title="個別詳細">
+  <v-card class="detail-output-area">
     <v-card-text>
-      <div class="detail">
-        <v-card class="mb-4">
-          <v-card-title>入力</v-card-title>
-          <v-card-text>
-            <v-row class="input-area">
-              <v-col class="pb-0">
-                <v-autocomplete
-                    label="ポケモン名"
-                    autocomplete="off"
-                    :items="pkName"
-                    v-model="detail['pk_name']"
-                    @update:modelValue="changePkName(detail['pk_name'])"
-                ></v-autocomplete>
-              </v-col>
-              <v-col class="pb-0">
-                <v-select
-                    label="性別"
-                    autocomplete="off"
-                    :items="genderList"
-                    v-model="detail['gender']"
-                    v-bind:disabled="genderList.length === 0"
-                    @update:modelValue="getImage(detail['pk_name'], detail['gender'])"
-                ></v-select>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-number-input
-                    :reverse="false"
-                    controlVariant="stacked"
-                    label="レベル"
-                    autocomplete="off"
-                    :hideInput="false"
-                    :inset="false"
-                    :min="1"
-                    :max="100"
-                    v-model="detail['level']"
-                ></v-number-input>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-autocomplete
-                    label="性格"
-                    autocomplete="off"
-                    :items="nature"
-                    v-model="detail['nature']"
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="特性"
-                    autocomplete="off"
-                    v-model="detail['ability']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="持ち物"
-                    autocomplete="off"
-                    v-model="detail['item']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="HP"
-                    autocomplete="off"
-                    v-model="detail['hp']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="攻撃"
-                    autocomplete="off"
-                    v-model="detail['attack']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="防御"
-                    autocomplete="off"
-                    v-model="detail['defense']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="特攻"
-                    autocomplete="off"
-                    v-model="detail['sp_attack']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="特防"
-                    autocomplete="off"
-                    v-model="detail['sp_defense']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="素早さ"
-                    autocomplete="off"
-                    v-model="detail['speed']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技1"
-                    autocomplete="off"
-                    v-model="detail['moves1']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技2"
-                    autocomplete="off"
-                    v-model="detail['moves2']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技3"
-                    autocomplete="off"
-                    v-model="detail['moves3']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技4"
-                    autocomplete="off"
-                    v-model="detail['moves4']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="自由入力欄"
-                    autocomplete="off"
-                    v-model="detail['free']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-switch
-                    label="フォルム・すがたを表記する"
-                    color="primary"
-                    v-model="detail['forms']"
-                ></v-switch>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
+      <v-card class="mb-4">
+        <v-card-title>出力設定</v-card-title>
+        <v-card-text>
+          <v-row class="setting-area">
+            <v-col class="pb-0" cols="12" sm="6">
+              <v-select
+                  label="デザイン"
+                  v-model="type"
+                  :items="typeItems"
+                  item-title="title"
+                  item-value="value"
+              ></v-select>
+            </v-col>
+            <v-col class="pb-0" cols="12" sm="6">
+              <v-select
+                  label="テーマカラー"
+                  v-model="color"
+                  :items="colorItems"
+                  item-title="title"
+                  item-value="value"
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-card-text>
+    <v-card-text>
       <div class="output">
         <v-card class="mb-4">
-          <v-card-title>出力1</v-card-title>
-          <v-card-text class="output-area">
-            <div class="output-image type-1">
-              <table class="pk-detail">
-                <thead class="pk-detail">
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-                  <th class="pk-detail" colspan="2" v-if="detail['forms']">{{ detail['pk_name'] }}{{ detail['gender'] }}</th>
-                  <th class="pk-detail" colspan="2" v-else>{{ detail['pokemon'] }}{{ detail['gender'] }}</th>
-                  <td class="pk-detail">Lv.{{ detail['level'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
-                  <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
-                  <td class="pk-detail"></td>
-                </tr>
-                </thead>
-                <tbody class="pk-detail">
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">HP</th>
-                  <td class="pk-detail">{{ detail['hp'] }}</td>
-                  <td class="pk-detail image-area" rowspan="4"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName + '.png'" v-bind:alt="detail['pk_name']"></td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">こうげき</th>
-                  <td class="pk-detail">{{ detail['attack'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">ぼうぎょ</th>
-                  <td class="pk-detail">{{ detail['defense'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">とくこう</th>
-                  <td class="pk-detail">{{ detail['sp_attack'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">とくぼう</th>
-                  <td class="pk-detail">{{ detail['sp_defense'] }}</td>
-                  <td class="pk-detail">もっているわざ</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">すばやさ</th>
-                  <td class="pk-detail">{{ detail['speed'] }}</td>
-                  <td class="pk-detail">{{ detail['moves1'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">せいかく</th>
-                  <td class="pk-detail">{{ detail['nature'] }}</td>
-                  <td class="pk-detail">{{ detail['moves2'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">とくせい</th>
-                  <td class="pk-detail">{{ detail['ability'] }}</td>
-                  <td class="pk-detail">{{ detail['moves3'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">もちもの</th>
-                  <td class="pk-detail">{{ detail['item'] }}</td>
-                  <td class="pk-detail">{{ detail['moves4'] }}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <v-col class="output-button-area pa-0">
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot('.output-image.type-1 > table.pk-detail')">画像で保存</v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton[1]" @click="buttonIframeCopy('.output-image.type-1 > table.pk-detail', 1)">
-                  iframeをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton[1]" @click="buttonHtmlCopy('.output-image.type-1 > table.pk-detail', 1)">
-                  HTMLをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton[1]" @click="buttonCssCopy(1)">
-                  CSSリンクをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-            </v-col>
+          <v-card-title>出力結果</v-card-title>
+          <v-card-text class="output-area" v-if="type === 'type1'">
+            <v-row v-for="i in 6" :key="i">
+              <v-col class="output-image type-1 overflow-auto" v-bind:class="'index' + i" cols="12" sm="6">
+                <div class="pk-detail-area">
+                  <OutputDetailType1 v-model="detail[i]" v-model:color="color"/>
+                </div>
+              </v-col>
+              <v-col class="output-button-area" cols="12" sm="6">
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color"
+                         @click="buttonScreenShot('.output-image.type-1.index' + i + ' > .pk-detail-area')">画像で保存
+                  </v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="iframeButton[i]"
+                         @click="buttonIframeCopy('.output-image.type-1.index' + i + ' > .pk-detail-area', 1, i)">
+                    iframeをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="htmlButton[i]"
+                         @click="buttonHtmlCopy('.output-image.type-1.index' + i + ' > .pk-detail-area', 1, i)">
+                    HTMLをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
           </v-card-text>
-        </v-card>
-        <v-card>
-          <v-card-title>出力2</v-card-title>
-          <v-card-text class="output-area">
-            <div class="output-image type-2">
-              <table class="pk-detail">
-                <thead class="pk-detail">
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'">
-                  <th class="pk-detail" colspan="2" v-if="detail['forms']">
-                    <div class="pk-detail head-area">
-                      <div class="pk-detail name-area">{{ detail['pk_name'] }}{{ detail['gender'] }}</div>
-                      <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
-                    </div>
-                  </th>
-                  <th class="pk-detail" colspan="2" v-else>
-                    <div class="pk-detail head-area">
-                      <div class="pk-detail name-area">{{ detail['pokemon'] }}{{ detail['gender'] }}</div>
-                      <div class="pk-detail level-area">Lv.{{ detail['level'] }}</div>
-                    </div>
-                  </th>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-3'" v-if="detail['free']">
-                  <th class="pk-detail" colspan="2">{{ detail['free'] }}</th>
-                </tr>
-                </thead>
-                <tbody class="pk-detail">
-                <tr class="pk-detail">
-                  <td class="pk-detail image-area" colspan="2"><img class="pk-detail" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName + '.png'" v-bind:alt="detail['pk_name']"></td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">HP</th>
-                  <td class="pk-detail">{{ detail['hp'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">こうげき</th>
-                  <td class="pk-detail">{{ detail['attack'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">ぼうぎょ</th>
-                  <td class="pk-detail">{{ detail['defense'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">とくこう</th>
-                  <td class="pk-detail">{{ detail['sp_attack'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">とくぼう</th>
-                  <td class="pk-detail">{{ detail['sp_defense'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">すばやさ</th>
-                  <td class="pk-detail">{{ detail['speed'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">せいかく</th>
-                  <td class="pk-detail">{{ detail['nature'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">とくせい</th>
-                  <td class="pk-detail">{{ detail['ability'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail">もちもの</th>
-                  <td class="pk-detail">{{ detail['item'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail">もっているわざ</th>
-                  <td class="pk-detail">{{ detail['moves1'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail"></th>
-                  <td class="pk-detail">{{ detail['moves2'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-2'">
-                  <th class="pk-detail"></th>
-                  <td class="pk-detail">{{ detail['moves3'] }}</td>
-                </tr>
-                <tr class="pk-detail" v-bind:class="props.settingColor + '-1'">
-                  <th class="pk-detail"></th>
-                  <td class="pk-detail">{{ detail['moves4'] }}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <v-col class="output-button-area pa-0">
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot('.output-image.type-2 > table.pk-detail')">画像で保存</v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton[2]" @click="buttonIframeCopy('.output-image.type-2 > table.pk-detail', 2)">
-                  iframeをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton[2]" @click="buttonHtmlCopy('.output-image.type-2 > table.pk-detail', 2)">
-                  HTMLをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton[2]" @click="buttonCssCopy(2)">
-                  CSSリンクをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-            </v-col>
+          <v-card-text class="output-area" v-if="type === 'type2'">
+            <v-row>
+              <v-col cols="12" sm="6" md="4" v-for="i in 6" :key="i">
+                <v-col class="output-image type-2 overflow-auto" v-bind:class="'index' + i" cols="12" sm="12">
+                  <div class="pk-detail-area">
+                    <OutputDetailType2 v-model="detail[i]" v-model:color="color"/>
+                  </div>
+                </v-col>
+                <v-col class="output-button-area" cols="12" sm="12">
+                  <div class="output-button pt-2 pb-2">
+                    <v-btn class="text-white" v-bind:color="color"
+                           @click="buttonScreenShot('.output-image.type-2.index' + i + ' > .pk-detail-area')">画像で保存
+                    </v-btn>
+                  </div>
+                  <div class="output-button pt-2 pb-2">
+                    <v-btn class="text-white" v-bind:color="color" :loading="iframeButton[i]"
+                           @click="buttonIframeCopy('.output-image.type-2.index' + i + ' > .pk-detail-area', 2, i)">
+                      iframeをコピー
+                      <template v-slot:loader>
+                        <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                      </template>
+                    </v-btn>
+                  </div>
+                  <div class="output-button pt-2 pb-2">
+                    <v-btn class="text-white" v-bind:color="color" :loading="htmlButton[i]"
+                           @click="buttonHtmlCopy('.output-image.type-2.index' + i + ' > .pk-detail-area', 2, i)">
+                      HTMLをコピー
+                      <template v-slot:loader>
+                        <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                      </template>
+                    </v-btn>
+                  </div>
+                </v-col>
+              </v-col>
+            </v-row>
           </v-card-text>
         </v-card>
       </div>

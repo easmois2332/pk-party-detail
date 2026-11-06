@@ -1,5 +1,11 @@
 <script setup>
-const props = defineProps(['settingColor']);
+import {ref} from "vue";
+
+const partyCssLink = ref('<link href="https://easmois2332.github.io/pk-assets/css/party_output.css" rel="stylesheet">');
+const detailCssLink = ref('<link href="https://easmois2332.github.io/pk-assets/css/detail_output.css" rel="stylesheet">');
+const buttonCssCopy = () => {
+  navigator.clipboard.writeText(partyCssLink.value + "\n" + detailCssLink.value);
+}
 
 </script>
 
@@ -29,57 +35,51 @@ const props = defineProps(['settingColor']);
     <v-card class="mb-4" title="機能説明">
       <v-card-text>
         <div class="mb-4">
-          <span class="font-bold"><v-icon icon="mdi-cog"></v-icon>設定</span><br>
+          <span class="font-bold">情報入力</span><br>
           <span>
-            本サイトの設定ができます。<br>
-            設定したテーマカラーは出力される画像、表に反映されます。
-          </span>
-        </div>
-        <div class="mb-4">
-          <span class="font-bold">構築詳細</span><br>
-          <span>
-            入力した情報を元に構築の一覧を出力できます。<br>
-          </span>
-        </div>
-        <div class="mb-4">
-          <span class="font-bold">個別詳細</span><br>
-          <span>
-            入力した情報を元に個別詳細を出力できます。<br>
+            出力したい情報を入力するタブです。<br>
             ある程度自由な入力を許可している為、自動で数値を算出する様な機能はありません。
+          </span>
+        </div>
+        <div class="mb-4">
+          <span class="font-bold">情報出力</span><br>
+          <span>
+            入力した情報を元に画像、Iframe、HTMLを出力するタブです。<br>
+            「出力設定」からデザイン、テーマカラーを設定できます。
           </span>
         </div>
         <div class="mb-4">
           <span class="font-bold">画像で保存</span><br>
           <span>
-            出力欄に表示されている内容を画像で保存します。<br>
-            表示内容そのままで保存する為、横幅の狭いスマートフォン端末など、内容が見切れている状態で保存すると見切れている状態で保存されます。<br>
-            スマートフォンを横持ちにし、内容が見切れないようにして保存するか、タブレット端末、PC端末などをご利用ください。<br>
+            出力結果に表示されている内容を画像で保存します。<br>
             ブラウザをズームして保存すると画像のサイズも大きくなります。
           </span>
         </div>
         <div class="mb-4">
           <span class="font-bold">IFRAMEをコピー</span><br>
           <span>
-            出力欄に表示されている内容を表示するiframeタグをクリップボードにコピーします。<br>
-            表示内容に合わせたwidthとheightを計算しています。貼り付け先のブログなどに合わせて調整していください。
+            出力結果に表示されている内容を表示するiframeタグをクリップボードにコピーします。<br>
+            表示内容に合わせたwidthとheightを計算しています。貼り付け先のブログなどに合わせて調整してください。
           </span>
         </div>
         <div class="mb-4">
           <span class="font-bold">HTMLをコピー</span><br>
           <span>
-            出力欄に表示されている内容のHTMLをクリップボードにコピーします。<br>
-            別途CSSの設定が必要になります。後述のCSSリンクを貼り付け先のブログに設定してください。
+            出力結果に表示されている内容のHTMLをクリップボードにコピーします。<br>
+            別途CSSの設定が必要になります。以下のCSSリンクを貼り付け先のブログに設定するか、各自でCSSを設定してください。
           </span>
+          <v-card variant="tonal">
+            <v-card-text>
+              <p>{{ partyCssLink }}</p>
+              <p>{{ detailCssLink }}</p>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn @click="buttonCssCopy">クリップボードにコピー</v-btn>
+            </v-card-actions>
+          </v-card>
         </div>
         <div class="mb-4">
-          <span class="font-bold">CSSリンクをコピー</span><br>
-          <span>
-            CSSリンクをクリップボードにコピーします。<br>
-            HTMLを使用する場合に貼り付け先のブログに設定してください。
-          </span>
-        </div>
-        <div class="mb-4">
-          <span class="font-bold">はてなブログへのCSSリンクの設置方法</span><br>
+          <span class="font-bold">はてなブログへのCSSリンクの設定方法</span><br>
           <span>
             「ブログを管理」から「設定」>「詳細設定」へアクセス。<br>
             「head内タグ」の「&lt;head&gt;要素にメタデータを追加」にコピーしたCSSリンクを貼り付けて保存。
@@ -88,6 +88,15 @@ const props = defineProps(['settingColor']);
       </v-card-text>
     </v-card>
     <v-card class="mb-4" title="更新履歴">
+      <v-card-text>
+        <div>
+          <span class="font-bold">v1.2.0</span><br>
+          <span>
+            サイトデザインを全体的に調整<br>
+            出力結果に表示されている内容が見切れている状態で「画像で保存」をしても保存される画像が見切れないように修正<br>
+          </span>
+        </div>
+      </v-card-text>
       <v-card-text>
         <div>
           <span class="font-bold">v1.1.0</span><br>

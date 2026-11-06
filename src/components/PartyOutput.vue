@@ -1,52 +1,34 @@
 <script setup>
 import {ref} from "vue";
 import html2canvas from "html2canvas";
-import pokemon from "@/classes/pokemon.js"
+import OutputPartyType1 from "@/components/OutputPartyType1.vue";
+import OutputPartyType2 from "@/components/OutputPartyType2.vue";
+import OutputPartyType3 from "@/components/OutputPartyType3.vue";
 
-const props = defineProps(['settingColor']);
-const emit = defineEmits(['detail-data']);
-const pkClass = new pokemon();
+const detail = defineModel({required: true});
+const type = ref('type1');
+const typeItems = [
+  {title: '簡易表示', value: 'type1'},
+  {title: '詳細表示（横長）', value: 'type2'},
+  {title: '詳細表示（縦長）', value: 'type3'},
+];
+const color = ref('blue');
+const colorItems = [
+  {title: '赤', value: 'red'},
+  {title: '緑', value: 'green'},
+  {title: '青', value: 'blue'},
+  {title: '黄', value: 'amber'},
+  {title: '茶', value: 'brown'},
+  {title: '灰', value: 'blue-grey'},
+];
+const count = ref(6);
 
-const pkName = pkClass.getPkNameList();
-
-let genderList = ref({
-  1: [], 2: [], 3: [], 4: [], 5: [], 6: []
-});
-let imageName = ref({
-  1: '0000_000_uk_n_000', 2: '0000_000_uk_n_000', 3: '0000_000_uk_n_000', 4: '0000_000_uk_n_000', 5: '0000_000_uk_n_000', 6: '0000_000_uk_n_000',
-});
-
-let pkCount = ref(1);
-let party = ref({
-  1: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
-  2: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
-  3: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
-  4: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
-  5: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
-  6: {pk_name: null, gender: '', free: '', moves1: '', moves2: '', moves3: '', moves4: '', ability: '', item: ''},
-});
-
-let htmlButton = ref(false);
-let cssButton = ref(false);
 let iframeButton = ref(false);
-
-const getImage = (i, name, gender) => {
-  imageName.value[i] = pkClass.getPkImage(name, gender);
-}
-
-const changePkName = (i, name) => {
-  genderList.value[i] = pkClass.getPkGenderList(name);
-  party.value[i]['gender'] = null;
-  getImage(i, name, party.value[i]['gender']);
-}
-
-const buttonInsertDetailData = (i) => {
-  emit('detail-data', JSON.parse(JSON.stringify(party.value[i])));
-}
+let htmlButton = ref(false);
 
 // スクリーンショットを撮る
 const buttonScreenShot = async () => {
-  const el = document.querySelector('.output-image > table.pk-party');
+  const el = document.querySelector('.output-image > .pk-party-area');
   const canvasElement = await html2canvas(el, {proxy: true, useCORS: true}).catch(e => {
     console.error(e);
   });
@@ -66,10 +48,11 @@ const buttonScreenShot = async () => {
 }
 
 // iframeをコピー
-const buttonIframeCopy = () => {
-  let el = document.querySelector('.output-image > table.pk-party');
-  let param = new URLSearchParams(JSON.stringify(party.value));
-  let url = document.location.href + 'iframe/party?color=' + props.settingColor + '&pkCount=' + pkCount.value + '&party=' + param.toString().replace('=', '');
+const buttonIframeCopy = (type) => {
+  let el = document.querySelector('.output-image > .pk-party-area');
+  let output = Object.fromEntries(Object.entries(detail.value).slice(0, count.value));
+  let param = new URLSearchParams(JSON.stringify(output));
+  let url = document.location.href + 'iframe/party' + type + '?color=' + color.value + '&party=' + param.toString().replace('=', '');
   navigator.clipboard.writeText('<iframe frameborder="no" scrolling="no" width="' + el.clientWidth + '" height="' + el.clientHeight + '" src="' + url + '"></iframe>');
   iframeButton.value = true;
   setTimeout(() => (iframeButton.value = false), 3000)
@@ -77,189 +60,143 @@ const buttonIframeCopy = () => {
 
 // HTMLをコピー
 const buttonHtmlCopy = () => {
-  let el = document.querySelector('.output-image > table.pk-party');
+  let el = document.querySelector('.output-image > .pk-party-area');
   navigator.clipboard.writeText(el.outerHTML);
   htmlButton.value = true;
   setTimeout(() => (htmlButton.value = false), 3000)
 }
-
-// CSSリンクをコピー
-const buttonCssCopy = () => {
-  navigator.clipboard.writeText('<link href="https://easmois2332.github.io/pk-assets/css/party_output.css" rel="stylesheet">');
-  cssButton.value = true;
-  setTimeout(() => (cssButton.value = false), 3000)
-}
 </script>
 
 <template>
-  <v-card class="party-output-area" title="構築詳細">
+  <v-card class="party-output-area">
     <v-card-text>
-      <div class="pk-count">
-        <div class="input-area">
-          <v-number-input
-              :reverse="false"
-              controlVariant="stacked"
-              label="ポケモンの数"
-              autocomplete="off"
-              :hideInput="false"
-              :inset="false"
-              :min="1"
-              :max="6"
-              v-model="pkCount"
-          ></v-number-input>
-        </div>
-      </div>
-      <div class="party">
-        <v-card class="mb-4" v-for="i in pkCount" :key="i">
-          <v-card-title>入力（{{ i }}匹目）</v-card-title>
-          <v-card-text>
-            <v-row class="input-area">
-              <v-col class="pb-0">
-                <v-autocomplete
-                    label="ポケモン名"
-                    autocomplete="off"
-                    :items="pkName"
-                    v-model="party[i]['pk_name']"
-                    @update:modelValue="changePkName(i, party[i]['pk_name'])"
-                ></v-autocomplete>
+      <v-card class="mb-4">
+        <v-card-title>出力設定</v-card-title>
+        <v-card-text>
+          <v-row class="setting-area">
+            <v-col class="pb-0" cols="12" sm="6">
+              <v-select
+                  label="デザイン"
+                  v-model="type"
+                  :items="typeItems"
+                  item-title="title"
+                  item-value="value"
+              ></v-select>
+            </v-col>
+            <v-col class="pb-0" cols="12" sm="6">
+              <v-select
+                  label="テーマカラー"
+                  v-model="color"
+                  :items="colorItems"
+                  item-title="title"
+                  item-value="value"
+              ></v-select>
+            </v-col>
+            <v-col class="pb-0" cols="12" sm="12">
+              <v-number-input
+                  label="ポケモンの数"
+                  v-model="count"
+                  :min="1"
+                  :max="6"
+              ></v-number-input>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-card-text>
+    <v-card-text>
+      <div class="output">
+        <v-card class="mb-4">
+          <v-card-title>出力結果</v-card-title>
+          <v-card-text class="output-area" v-if="type === 'type1'">
+            <v-row>
+              <v-col class="output-image overflow-auto" cols="12" sm="6">
+                <div class="pk-party-area">
+                  <OutputPartyType1 v-model="detail" v-model:count="count" v-model:color="color"/>
+                </div>
               </v-col>
-              <v-col class="pb-0">
-                <v-select
-                    label="性別"
-                    autocomplete="off"
-                    :items="genderList[i]"
-                    v-model="party[i]['gender']"
-                    v-bind:disabled="genderList[i].length === 0"
-                    @update:modelValue="getImage(i, party[i]['pk_name'], party[i]['gender'])"
-                ></v-select>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="自由入力欄"
-                    autocomplete="off"
-                    v-model="party[i]['free']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技1"
-                    autocomplete="off"
-                    v-model="party[i]['moves1']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技2"
-                    autocomplete="off"
-                    v-model="party[i]['moves2']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技3"
-                    autocomplete="off"
-                    v-model="party[i]['moves3']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="技4"
-                    autocomplete="off"
-                    v-model="party[i]['moves4']"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-            <v-row class="input-area">
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="特性"
-                    autocomplete="off"
-                    v-model="party[i]['ability']"
-                ></v-text-field>
-              </v-col>
-              <v-col class="pt-0 pb-0">
-                <v-text-field
-                    clearable
-                    label="持ち物"
-                    autocomplete="off"
-                    v-model="party[i]['item']"
-                ></v-text-field>
+              <v-col class="output-button-area" cols="12" sm="6">
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" @click="buttonScreenShot">画像で保存</v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="iframeButton" @click="buttonIframeCopy(1)">
+                    iframeをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="htmlButton" @click="buttonHtmlCopy">
+                    HTMLをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
-            <v-btn variant="tonal" @click="buttonInsertDetailData(i)">個別詳細に入力</v-btn>
-          </v-card-actions>
-        </v-card>
-      </div>
-      <div class="output">
-        <v-card>
-          <v-card-title>出力</v-card-title>
-          <v-card-text class="output-area">
-            <div class="output-image">
-              <table class="pk-party">
-                <tbody class="pk-party" v-bind:class="props.settingColor + '-' + (i % 2 + 1)" v-for="i in pkCount" :key="i">
-                <tr class="pk-party">
-                  <td class="pk-party image-area" rowspan="2">
-                    <img class="pk-party icon" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Icon/pokeball_icon_000.png'">
-                    <img class="pk-party pokemon" v-bind:src="'https://easmois2332.github.io/pk-assets/image/Pokemon/Normal/' + imageName[i] + '.png'" v-bind:alt="party[i]['pk_name']">
-                  </td>
-                  <td class="pk-party">{{ party[i]['moves1'] }}</td>
-                  <td class="pk-party">{{ party[i]['moves2'] }}</td>
-                </tr>
-                <tr class="pk-party">
-                  <td class="pk-party">{{ party[i]['moves3'] }}</td>
-                  <td class="pk-party">{{ party[i]['moves4'] }}</td>
-                </tr>
-                <tr class="pk-party">
-                  <td class="pk-party free">{{ party[i]['free'] }}</td>
-                  <td class="pk-party">{{ party[i]['ability'] }}</td>
-                  <td class="pk-party">{{ party[i]['item'] }}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <v-col class="output-button-area pa-0">
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" @click="buttonScreenShot">画像で保存</v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="iframeButton" @click="buttonIframeCopy">
-                  iframeをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="htmlButton" @click="buttonHtmlCopy">
-                  HTMLをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-              <div class="output-button pt-2 pb-2">
-                <v-btn class="text-white" v-bind:color="props.settingColor" :loading="cssButton" @click="buttonCssCopy">
-                  CSSリンクをコピー
-                  <template v-slot:loader>
-                    <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
-                  </template>
-                </v-btn>
-              </div>
-            </v-col>
+          <v-card-text class="output-area" v-if="type === 'type2'">
+            <v-row>
+              <v-col class="output-image overflow-auto" cols="12" sm="12">
+                <div class="pk-party-area">
+                  <OutputPartyType2 v-model="detail" v-model:count="count" v-model:color="color"/>
+                </div>
+              </v-col>
+              <v-col class="output-button-area" cols="12" sm="12">
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" @click="buttonScreenShot">画像で保存</v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="iframeButton" @click="buttonIframeCopy(2)">
+                    iframeをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="htmlButton" @click="buttonHtmlCopy">
+                    HTMLをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-text class="output-area" v-if="type === 'type3'">
+            <v-row>
+              <v-col class="output-image overflow-auto" cols="12" sm="12">
+                <div class="pk-party-area">
+                  <OutputPartyType3 v-model="detail" v-model:count="count" v-model:color="color"/>
+                </div>
+              </v-col>
+              <v-col class="output-button-area" cols="12" sm="12">
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" @click="buttonScreenShot">画像で保存</v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="iframeButton" @click="buttonIframeCopy(3)">
+                    iframeをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+                <div class="output-button pt-2 pb-2">
+                  <v-btn class="text-white" v-bind:color="color" :loading="htmlButton" @click="buttonHtmlCopy">
+                    HTMLをコピー
+                    <template v-slot:loader>
+                      <v-icon icon="mdi-checkbox-marked-circle"></v-icon>
+                    </template>
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
           </v-card-text>
         </v-card>
       </div>
